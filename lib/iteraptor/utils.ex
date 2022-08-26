@@ -106,7 +106,7 @@ defmodule Iteraptor.Utils do
   def smart_convert(value) do
     case value |> to_string() |> Integer.parse() do
       {value, ""} -> value
-      _ -> String.to_existing_atom(value)
+      _ -> try do String.to_existing_atom(value) rescue ArgumentError -> String.to_atom(value) end
     end
   end
 
